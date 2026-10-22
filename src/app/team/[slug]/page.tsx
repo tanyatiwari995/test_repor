@@ -7,6 +7,7 @@ const teamData: Record<string, any> = {
   "vaibhav-sheel-pandey": {
     name: "Vaibhav Sheel Pandey",
     role: "Founder & Managing Director",
+    photo: "/team/vaibhav.jpg",
     office: "Noida (UP) & Rudrapur (Uttarakhand)",
     bio: "Vaibhav Sheel Pandey is the founder and Managing Director of Tenacious Hub Private Limited. With over 10 years of experience across digital transformation, software engineering, and business process outsourcing (BPO), Vaibhav has guided the company's evolution into a trusted multi-disciplinary agency.",
     quote: "Our mission is to bridge technical excellence and operational execution for businesses so they can scale with predictability and efficiency.",
@@ -94,8 +95,17 @@ export default async function TeamMemberPage({ params }: TeamMemberProps) {
       <SectionWrapper className="py-16">
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8 glass-card border border-[var(--border-main)] rounded-3xl p-8 shadow-sm">
-            <div className="w-32 h-32 rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-[var(--accent)] flex items-center justify-center text-3xl font-extrabold text-white flex-shrink-0 shadow-md">
-              {member.name.split(" ").map((n: string) => n[0]).join("")}
+            <div className="w-32 h-32 rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-[var(--accent)] flex items-center justify-center text-3xl font-extrabold text-white flex-shrink-0 shadow-md overflow-hidden">
+              {member.photo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                member.name.split(" ").map((n: string) => n[0]).join("")
+              )}
             </div>
             <div className="space-y-3 text-center sm:text-left">
               <h1 className="text-3xl font-extrabold text-[var(--text-main)]">{member.name}</h1>

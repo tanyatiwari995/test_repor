@@ -5,17 +5,7 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 
-const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-  </svg>
-);
 
-const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-  </svg>
-);
 
 export const metadata: Metadata = {
   title: "Our Team | Tenacious Hub Leadership",
@@ -35,9 +25,9 @@ const founder = {
   bio: `Vaibhav Sheel Pandey founded Tenacious Hub with a vision to bring enterprise-grade digital capabilities to businesses of all sizes. With deep expertise spanning web engineering, performance marketing, and BPO operations, he has led the firm from a focused web design practice to a full-stack digital technology and management-consulting company serving clients across India and globally.
 
 A firm believer in outcome-over-output, Vaibhav personally oversees client strategy and ensures every engagement is grounded in measurable business impact.`,
-  photo: null, // TODO_CONFIRM: Upload photo to /public/team/vaibhav.jpg
-  linkedin: "https://linkedin.com/in/vaibhav-sheel-pandey", // TODO_CONFIRM
-  twitter: null, // TODO_CONFIRM
+  photo: "/team/vaibhav.jpg",
+  linkedin: null,
+  twitter: null,
   specialties: [
     "Digital Strategy & Architecture",
     "Business Development & Partnerships",
@@ -98,34 +88,6 @@ export default function TeamPage() {
                   </div>
                 )}
               </div>
-
-              {/* Social links */}
-              <div className="flex items-center gap-3 mt-4">
-                {founder.linkedin && (
-                  <a
-                    href={founder.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-[var(--primary)] font-semibold transition-colors"
-                    aria-label="LinkedIn profile"
-                  >
-                    <LinkedinIcon className="w-4 h-4 text-[var(--primary)]" />
-                    <span>LinkedIn</span>
-                  </a>
-                )}
-                {founder.twitter && (
-                  <a
-                    href={founder.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-[var(--primary)] font-semibold transition-colors"
-                    aria-label="Twitter profile"
-                  >
-                    <TwitterIcon className="w-4 h-4 text-[var(--primary)]" />
-                    <span>Twitter</span>
-                  </a>
-                )}
-              </div>
             </div>
 
             {/* Bio */}
@@ -145,9 +107,6 @@ export default function TeamPage() {
                 {founder.bio.split("\n\n").map((para, idx) => (
                   <p key={idx}>{para}</p>
                 ))}
-                <p className="text-xs text-[var(--text-subtle)] italic">
-                  TODO_CONFIRM: Please verify and expand this bio with the founder.
-                </p>
               </div>
 
               <div>
