@@ -1,0 +1,511 @@
+// Tenacious Hub — Prisma Schema
+// Run: npx prisma migrate dev --name init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── Auth ────────────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  EDITOR
+  SALES
+  VIEWER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?   // hashed with argon2
+  role          Role      @default(VIEWER)
+  totpSecret    String?   // for optional 2FA
+  totpEnabled   Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions      Session[]
+  accounts      Account[]
+  auditLogs     AuditLog[]
+  blogPosts     BlogPost[]
+  leadNotes     LeadNote[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// ─── Services ────────────────────────────────────────────────
+
+enum Pillar {
+  DIGITAL_ENGINEERING
+  GROWTH_MARKETING
+  BUSINESS_OPERATIONS
+}
+
+model ServicePillar {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  pillar      Pillar
+  description String    @db.Text
+  heroTagline String?
+  metaTitle   String?
+  metaDesc    String?
+  ogImage     String?
+  order       Int       @default(0)
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  services    Service[]
+
+  @@map("service_pillars")
+}
+
+model Service {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  name        String
+  shortDesc   String?
+  body        String?       @db.Text  // Tiptap JSON or HTML
+  metaTitle   String?
+  metaDesc    String?
+  ogImage     String?
+  keywords    String[]
+  order       Int           @default(0)
+  published   Boolean       @default(true)
+  pillarId    String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  pillar      ServicePillar @relation(fields: [pillarId], references: [id])
+  faqs        Faq[]
+  pricingPlans PricingPlan[]
+
+  @@map("services")
+}
+
+// ─── Pricing ─────────────────────────────────────────────────
+
+model PricingPlan {
+  id          String    @id @default(cuid())
+  name        String
+  price       Int?      // in paise (INR)
+  currency    String    @default("INR")
+  billingType String    @default("one-time") // one-time | monthly | yearly
+  isPopular   Boolean   @default(false)
+  description String?
+  serviceId   String?
+  order       Int       @default(0)
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  service     Service?  @relation(fields: [serviceId], references: [id])
+  features    PricingFeature[]
+
+  @@map("pricing_plans")
+}
+
+model PricingFeature {
+  id        String      @id @default(cuid())
+  text      String
+  included  Boolean     @default(true)
+  order     Int         @default(0)
+  planId    String
+
+  plan      PricingPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  @@map("pricing_features")
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────
+
+model Faq {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String   @db.Text
+  order     Int      @default(0)
+  global    Boolean  @default(false) // show on home page FAQ
+  serviceId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  service   Service? @relation(fields: [serviceId], references: [id])
+
+  @@map("faqs")
+}
+
+// ─── Case Studies ─────────────────────────────────────────────
+
+model CaseStudy {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  client      String
+  industry    String?
+  challenge   String   @db.Text
+  approach    String   @db.Text
+  results     String   @db.Text
+  keyMetric   String?  // e.g. "+210% Leads"
+  subMetric   String?  // e.g. "-42% CPA"
+  pillar      Pillar?
+  tags        String[]
+  coverImage  String?
+  gallery     String[]
+  testimonial String?
+  published   Boolean  @default(false)
+  featured    Boolean  @default(false)
+  metaTitle   String?
+  metaDesc    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("case_studies")
+}
+
+// ─── Testimonials ─────────────────────────────────────────────
+
+model Testimonial {
+  id         String   @id @default(cuid())
+  authorName String
+  authorRole String?
+  company    String?
+  avatar     String?
+  content    String   @db.Text
+  rating     Int      @default(5)
+  pillar     Pillar?
+  published  Boolean  @default(false)
+  featured   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+// ─── Team ─────────────────────────────────────────────────────
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  title       String
+  bio         String?  @db.Text
+  photo       String?
+  email       String?
+  linkedin    String?
+  twitter     String?
+  order       Int      @default(0)
+  isFounder   Boolean  @default(false)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("team_members")
+}
+
+// ─── Blog ─────────────────────────────────────────────────────
+
+model BlogCategory {
+  id        String     @id @default(cuid())
+  slug      String     @unique
+  name      String
+  desc      String?
+  order     Int        @default(0)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  posts     BlogPost[]
+
+  @@map("blog_categories")
+}
+
+model Tag {
+  id        String     @id @default(cuid())
+  slug      String     @unique
+  name      String
+  createdAt DateTime   @default(now())
+
+  posts     BlogPost[]
+
+  @@map("tags")
+}
+
+model BlogPost {
+  id           String       @id @default(cuid())
+  slug         String       @unique
+  title        String
+  excerpt      String?      @db.Text
+  body         String       @db.Text  // Tiptap HTML
+  coverImage   String?
+  metaTitle    String?
+  metaDesc     String?
+  ogImage      String?
+  readingTime  Int?         // minutes
+  published    Boolean      @default(false)
+  featured     Boolean      @default(false)
+  publishedAt  DateTime?
+  scheduledAt  DateTime?
+  legacyId     Int?         @unique  // original blog ID for migration
+  authorId     String?
+  categoryId   String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  author       User?        @relation(fields: [authorId], references: [id])
+  category     BlogCategory? @relation(fields: [categoryId], references: [id])
+  tags         Tag[]
+
+  @@map("blog_posts")
+}
+
+// ─── Leads & CRM ─────────────────────────────────────────────
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL
+  WON
+  LOST
+}
+
+model Lead {
+  id           String     @id @default(cuid())
+  name         String
+  email        String
+  phone        String?
+  company      String?
+  website      String?
+  services     String[]   // selected service interests
+  budget       String?
+  timeline     String?
+  message      String?    @db.Text
+  source       String?    // utm_source
+  medium       String?    // utm_medium
+  campaign     String?    // utm_campaign
+  referrer     String?
+  status       LeadStatus @default(NEW)
+  assignedTo   String?    // user ID
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  notes        LeadNote[]
+  history      LeadStatusHistory[]
+
+  @@map("leads")
+}
+
+model LeadNote {
+  id        String   @id @default(cuid())
+  leadId    String
+  userId    String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("lead_notes")
+}
+
+model LeadStatusHistory {
+  id        String     @id @default(cuid())
+  leadId    String
+  fromStatus LeadStatus?
+  toStatus  LeadStatus
+  changedBy String?
+  createdAt DateTime   @default(now())
+
+  lead      Lead       @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@map("lead_status_history")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("contact_messages")
+}
+
+// ─── Newsletter ───────────────────────────────────────────────
+
+model NewsletterSubscriber {
+  id          String    @id @default(cuid())
+  email       String    @unique
+  name        String?
+  confirmed   Boolean   @default(false)
+  confirmToken String?  @unique
+  unsubToken  String?   @unique
+  source      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("newsletter_subscribers")
+}
+
+// ─── SEO Audit Tool ───────────────────────────────────────────
+
+model SeoAuditRequest {
+  id          String   @id @default(cuid())
+  url         String
+  email       String
+  name        String?
+  score       Int?
+  report      Json?    // stored audit results
+  emailSent   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@map("seo_audit_requests")
+}
+
+// ─── Careers ─────────────────────────────────────────────────
+
+model JobPost {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  department  String?
+  location    String?
+  type        String?   // Full-time | Part-time | Remote | Contract
+  description String    @db.Text
+  requirements String?  @db.Text
+  published   Boolean   @default(false)
+  closingDate DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  applications JobApplication[]
+
+  @@map("job_posts")
+}
+
+model JobApplication {
+  id         String    @id @default(cuid())
+  jobId      String
+  name       String
+  email      String
+  phone      String?
+  coverLetter String?  @db.Text
+  resumeUrl  String?
+  status     String    @default("received")
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  job        JobPost   @relation(fields: [jobId], references: [id])
+
+  @@map("job_applications")
+}
+
+// ─── Media ───────────────────────────────────────────────────
+
+model MediaAsset {
+  id         String   @id @default(cuid())
+  filename   String
+  url        String
+  size       Int?
+  mimeType   String?
+  alt        String?
+  uploadedBy String?
+  createdAt  DateTime @default(now())
+
+  @@map("media_assets")
+}
+
+// ─── Redirects (DB-driven, managed in /admin) ────────────────
+
+model Redirect {
+  id          String   @id @default(cuid())
+  source      String   @unique
+  destination String
+  permanent   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("redirects")
+}
+
+// ─── Site Settings ────────────────────────────────────────────
+
+model SiteSettings {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  label     String?
+  group     String?
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+// ─── Audit Log ────────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  entity     String?
+  entityId   String?
+  metadata   Json?
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}
