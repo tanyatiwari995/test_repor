@@ -1,63 +1,9 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { ArrowRight, ChevronRight, MapPin, Briefcase, Award, Mail } from "lucide-react";
-
-const teamData: Record<string, any> = {
-  "vaibhav-sheel-pandey": {
-    name: "Vaibhav Sheel Pandey",
-    role: "Founder & Managing Director",
-    photo: "/team/vaibhav.jpg",
-    office: "Noida (UP) & Rudrapur (Uttarakhand)",
-    bio: "Vaibhav Sheel Pandey is the founder and Managing Director of Tenacious Hub Private Limited. With over 10 years of experience across digital transformation, software engineering, and business process outsourcing (BPO), Vaibhav has guided the company's evolution into a trusted multi-disciplinary agency.",
-    quote: "Our mission is to bridge technical excellence and operational execution for businesses so they can scale with predictability and efficiency.",
-    responsibilities: [
-      "Strategic roadmap and company growth direction",
-      "Key enterprise account strategy & leadership",
-      "Pillar innovation across Engineering, Growth, and BPO operations"
-    ],
-    experience: "10+ Years Industry Leadership",
-  },
-  "ananya-sharma": {
-    name: "Ananya Sharma",
-    role: "Head of Growth Marketing",
-    office: "Noida Office",
-    bio: "Ananya Sharma leads the Growth Marketing division at Tenacious Hub, overseeing search engine optimization, paid media campaigns, and Generative Engine Optimization (GEO).",
-    quote: "Marketing in 2026 demands AI search visibility, high-intent targeting, and ruthless focus on conversion tracking.",
-    responsibilities: [
-      "Client SEO & GEO organic search campaigns",
-      "PPC media budgets and ROAS optimization",
-      "Performance content writing team guidance"
-    ],
-    experience: "8+ Years Growth Marketing",
-  },
-  "rohit-verma": {
-    name: "Rohit Verma",
-    role: "VP of Software Engineering",
-    office: "Noida (Corporate) Office",
-    bio: "Rohit Verma directs technical software engineering, website architecture, mobile apps, and attendance management software development.",
-    quote: "Clean, modular code and sub-second page performance are non-negotiable standards for modern web applications.",
-    responsibilities: [
-      "Next.js, React & Node.js application architecture",
-      "Android mobile app development & API design",
-      "Cybersecurity and code quality standards"
-    ],
-    experience: "9+ Years Technical Architecture",
-  },
-  "megha-gupta": {
-    name: "Megha Gupta",
-    role: "Director of Business Operations & BPO",
-    office: "Rudrapur HQ",
-    bio: "Megha Gupta manages back-office operations, virtual assistant desk teams, data entry accuracy standards, and financial accounting support.",
-    quote: "Precision and SLA compliance are the cornerstones of successful back-office outsourcing.",
-    responsibilities: [
-      "BPO team management and QA audits",
-      "Virtual Assistant deployment workflows",
-      "Financial advisory and bookkeeping oversight"
-    ],
-    experience: "7+ Years Operations Management",
-  }
-};
+import { ChevronRight, MapPin, Briefcase } from "lucide-react";
+import { teamDataMap, allTeamMembers, type TeamMember } from "@/lib/team-data";
 
 interface TeamMemberProps {
   params: Promise<{
@@ -66,12 +12,33 @@ interface TeamMemberProps {
 }
 
 export async function generateStaticParams() {
-  return Object.keys(teamData).map((slug) => ({ slug }));
+  return allTeamMembers.map((member) => ({ slug: member.slug }));
+}
+
+export async function generateMetadata({ params }: TeamMemberProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const member: TeamMember | undefined = teamDataMap[resolvedParams.slug];
+
+  if (!member) {
+    return {
+      title: "Team Member | Tenacious Hub",
+    };
+  }
+
+  return {
+    title: `${member.name} - ${member.role} | Tenacious Hub`,
+    description: member.bio.slice(0, 160),
+    openGraph: {
+      title: `${member.name} | Tenacious Hub Leadership`,
+      description: member.bio.slice(0, 160),
+      url: `https://www.tenacioushub.com/team/${member.slug}`,
+    },
+  };
 }
 
 export default async function TeamMemberPage({ params }: TeamMemberProps) {
   const resolvedParams = await params;
-  const member = teamData[resolvedParams.slug];
+  const member: TeamMember | undefined = teamDataMap[resolvedParams.slug];
 
   if (!member) notFound();
 

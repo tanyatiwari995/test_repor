@@ -1,9 +1,28 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { ArrowRight, ChevronRight, CheckCircle2, Trophy, BarChart3, Clock, Zap } from "lucide-react";
+import { ArrowRight, ChevronRight, CheckCircle2 } from "lucide-react";
 
-const caseStudiesMap: Record<string, any> = {
+interface CaseStudyMetric {
+  label: string;
+  value: string;
+}
+
+interface CaseStudy {
+  slug: string;
+  title: string;
+  client: string;
+  industry: string;
+  pillar: string;
+  metrics: CaseStudyMetric[];
+  challenge: string;
+  approach: string;
+  results: string[];
+  tech: string[];
+  heroImage: string;
+}
+
+const caseStudiesMap: Record<string, CaseStudy> = {
   "fintech-lead-generation-boost": {
     slug: "fintech-lead-generation-boost",
     title: "Scaling Lead Generation by 210% for Regional Financial Services",
@@ -118,7 +137,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyProps) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
-            {study.metrics.map((m: any, idx: number) => (
+            {study.metrics.map((m: CaseStudyMetric, idx: number) => (
               <div key={idx} className="glass-card rounded-2xl p-6 text-center border border-[var(--border-main)] shadow-sm">
                 <div className="text-3xl font-extrabold text-[var(--primary)] mb-1">{m.value}</div>
                 <div className="text-xs text-[var(--text-muted)] font-semibold">{m.label}</div>

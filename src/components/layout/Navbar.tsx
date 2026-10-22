@@ -67,6 +67,7 @@ const pillars = [
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
+  { name: "Team", href: "/team" },
   { name: "Services", href: "/services", hasMega: true },
   { name: "Work", href: "/work" },
   { name: "Pricing", href: "/pricing" },

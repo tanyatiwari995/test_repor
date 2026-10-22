@@ -1,9 +1,21 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { ArrowRight, ChevronRight, MapPin, Briefcase, Clock, CheckCircle2, Upload, Send } from "lucide-react";
+import { ChevronRight, MapPin, Briefcase, Clock, CheckCircle2, Upload, Send } from "lucide-react";
 
-const jobDetails: Record<string, any> = {
+interface JobDetail {
+  slug: string;
+  title: string;
+  department: string;
+  type: string;
+  location: string;
+  experience: string;
+  description: string;
+  responsibilities: string[];
+  requirements: string[];
+}
+
+const jobDetails: Record<string, JobDetail> = {
   "senior-nextjs-developer": {
     slug: "senior-nextjs-developer",
     title: "Senior Next.js / Full-Stack Engineer",

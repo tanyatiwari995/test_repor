@@ -58,8 +58,8 @@ export function useCountUp(end: number, duration: number = 2000, startOnVisible:
 
   useEffect(() => {
     if (!startOnVisible) {
-      start();
-      return;
+      const animFrame = requestAnimationFrame(start);
+      return () => cancelAnimationFrame(animFrame);
     }
 
     const element = ref.current;
