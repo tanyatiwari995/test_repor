@@ -196,7 +196,7 @@ export default function BlogPage() {
 
                       {/* Title */}
                       <h2 className="text-base sm:text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--primary)] transition-colors duration-200 line-clamp-2 leading-snug">
-                        <Link href={`/blog-detail.php?action=detail&id=${post.id}`}>{post.title}</Link>
+                        <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                       </h2>
 
                       {/* Excerpt */}
@@ -209,7 +209,7 @@ export default function BlogPage() {
                   {/* Card Bottom Link */}
                   <div className="px-6 pb-6 pt-2">
                     <Link
-                      href={`/blog-detail.php?action=detail&id=${post.id}`}
+                      href={`/blog/${post.slug}`}
                       className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--primary)] group-hover:text-[var(--primary-light)] transition-colors"
                     >
                       <span>Read Full Story</span>

@@ -22,6 +22,27 @@ interface BlogDetailViewProps {
   post: BlogPost;
 }
 
+function cleanArticleContent(html: string): string {
+  if (!html) return "";
+  return html
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/rural\.php/gi, "/services/business-operations/rural-economic-development")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/contact-us\.php/gi, "/contact")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/marketing\.php/gi, "/services/growth-marketing")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/blog\.php/gi, "/blog")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/social-media\.php/gi, "/services/growth-marketing/social-media-management")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/seo\.php/gi, "/services/growth-marketing/seo")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/ads\.php/gi, "/services/growth-marketing/ads-management")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/startup\.php/gi, "/services/business-operations/startup-advice")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/finance\.php/gi, "/services/business-operations/finance-accounting")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/service\.php/gi, "/services")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/index\.php/gi, "/")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/founder\.php/gi, "/team")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/package\.php/gi, "/pricing")
+    .replace(/https?:\/\/(www\.)?tenacioushub\.com\/?(?=["'\s>])/gi, "/")
+    .replace(/https?:\/\/www\.blogger\.com\/[^\s"'>]+/gi, "/services")
+    .replace(/target=["']_blank["']/gi, "");
+}
+
 export function BlogDetailView({ post }: BlogDetailViewProps) {
   const [commentText, setCommentText] = useState("");
   const [commentSubmitted, setCommentSubmitted] = useState(false);
@@ -132,7 +153,7 @@ export function BlogDetailView({ post }: BlogDetailViewProps) {
                   prose-th:bg-[var(--primary)]/10 prose-th:p-3 prose-th:text-[var(--text-main)] prose-th:font-bold prose-th:border prose-th:border-[var(--border-main)]
                   prose-td:p-3 prose-td:border prose-td:border-[var(--border-main)] prose-td:text-[var(--text-muted)]
                   prose-a:text-[var(--primary)] prose-a:font-bold hover:prose-a:underline"
-                  dangerouslySetInnerHTML={{ __html: post.content }}
+                  dangerouslySetInnerHTML={{ __html: cleanArticleContent(post.content) }}
                 />
 
                 {/* Interactive Comment Box */}
@@ -228,7 +249,7 @@ export function BlogDetailView({ post }: BlogDetailViewProps) {
                   {recentPosts.map((rPost) => (
                     <Link
                       key={rPost.id}
-                      href={`/blog-detail.php?action=detail&id=${rPost.id}`}
+                      href={`/blog/${rPost.slug}`}
                       className="group flex items-start gap-3 p-2 rounded-xl hover:bg-[var(--primary)]/8 transition-all"
                     >
                       <div className="w-14 h-14 rounded-lg overflow-hidden bg-slate-800 flex-shrink-0">
