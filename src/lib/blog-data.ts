@@ -357,30 +357,6 @@ export const allBlogPosts: BlogPost[] = [
     "content": "<p><strong>Hello Readers,</strong></p><p>As we all know, Google Search Console is the perfect tool for understanding how websites are performing on organic search results of Google. Google keeps adding new features to the search console to help <a href=\"/services/growth-marketing/seo\">webmasters</a> analyze the performance of their websites. Here, you can find a summary of all the latest updates by Google-</p><p><strong>Jan-2021 update:</strong> Google updated the Search Console coverage report, News performance report and crawl stats report to the search console. With these changes, you can now dive deeper into issues around Google crawling and indexing your website and lets you find how well your news site performs in Google News.                                                                     </p><p><strong>Feb-2021 update:</strong> Google Search Console Discover performance report now includes all data. Google said, “we are now providing a single place in Search Console to see all your site’s Discover impressions and click stats, including from Chrome.”</p><p>Also, Google updated metric boundaries for core web vitals in Search Console. Google Search Console added ‘associations’ update so you can link with other Google accounts, such as YouTube, Google Analytics, Android apps and much more.                                                                           <strong>March-2021 update:</strong> Google updated Search Console rich results report such as Job posting report and FAQ and Q&A report.</p><p>Google Search Console users experience crawl stats report data issues between March 10th and March 23rd. Google clarified “this issue did not affect actual page fetches, only the reporting of fetch activity during this period.”</p><p>Also, Google added practice problems and math solver structured data and Search Console reports in the march-2021 update.</p><p> </p><p><strong>April-2021 update:</strong> Google Search Console added regular expression support and more data filtering to Performance reports.</p><p>Also, the Google Search Console performance report image impression changed in this update.</p><p>          For a detailed explanation, please visit <a href=\"/services/growth-marketing/seo\">\"Tenacious Hub\"</a>.</p><p>I hope, you all like this blog. Please encourage me to dig more interesting facts by liking and leaving your own thoughts in the comment section. Thanks for reading ?.</p><p><strong> </strong></p>"
   },
   {
-    "id": 11,
-    "title": "Enterprise Cloud Infrastructure & Scalable Hosting Architecture",
-    "slug": "enterprise-cloud-infrastructure-scalable-hosting-architecture",
-    "image": "https://tenacioushub.com/uploads/blog/th-dm.jpg",
-    "author": "anuradha",
-    "date": "Jan 2026",
-    "comments": "04 Comments",
-    "category": "Website Development",
-    "excerpt": "Discover how modern containerization, load-balancing, and cloud infrastructure empower modern enterprise applications to achieve 99.99% uptime.",
-    "content": "<p>In modern web infrastructure, uptime, resilience, and horizontal elasticity are critical for maintaining business continuity. When enterprise web platforms scale, traditional shared or dedicated server architectures often face severe bottlenecks during peak traffic surges.</p>\n<h3>1. Multi-Zone Load Balancing and High Availability</h3>\n<p>Deploying application clusters across multiple availability zones guarantees zero-downtime deployments and rapid disaster recovery. Coupled with automated health checks and SSL offloading, traffic is intelligently routed away from impaired nodes.</p>\n<h3>2. Serverless & Microservices Integration</h3>\n<p>By decoupling monolithic backends into targeted microservices and serverless functions, organizations reduce latency and drastically trim infrastructure costs while accelerating feature delivery.</p>\n<h3>3. Proactive Monitoring and Security Hardening</h3>\n<p>Modern cloud hosting requires end-to-end telemetry: real-time metric collection, distributed tracing, automated vulnerability scanning, and managed DDoS protection. Tenacious Hub helps enterprises architect robust, compliant cloud infrastructures designed for high-concurrency environments.</p>"
-  },
-  {
-    "id": 10,
-    "title": "E-Commerce Optimization: Converting Browsers into Loyal Brand Advocates",
-    "slug": "e-commerce-optimization-converting-browsers-into-loyal-brand-advocates",
-    "image": "https://tenacioushub.com/uploads/blog/th-dm.jpg",
-    "author": "anuradha",
-    "date": "Jan 2026",
-    "comments": "04 Comments",
-    "category": "Digital Marketing",
-    "excerpt": "Proven strategies for optimizing e-commerce sales funnels, streamlining checkout UX, and maximizing customer lifetime value through personalization.",
-    "content": "<p>Building an online storefront is merely the initial step in the e-commerce lifecycle. Achieving sustained profitability demands continuous optimization of the conversion funnel, from search visibility down to post-purchase retention.</p>\n<h3>1. Frictionless Checkout UX</h3>\n<p>Cart abandonment remains one of the greatest revenue drains for online retailers. Introducing single-page checkout flows, guest purchasing options, and diverse digital wallet integrations (Apple Pay, Google Pay, UPI) significantly elevates completion rates.</p>\n<h3>2. Personalization & AI-Driven Product Recommendations</h3>\n<p>Tailoring catalog displays according to browsing history, past cart additions, and predictive affinity algorithms elevates average order value (AOV) by up to 35%.</p>\n<h3>3. Retention Loops and Automated Re-engagement</h3>\n<p>Targeted SMS and email automation sequences that nurture first-time buyers into repeat brand evangelists ensure sustainable return on ad spend (ROAS) across all acquisition channels.</p>"
-  },
-  {
     "id": 9,
     "title": "Dive into Digital Marketing world(SEM)- TOP interview questions",
     "slug": "dive-into-digital-marketing-world-sem-top-interview-questions",
@@ -439,42 +415,6 @@ export const allBlogPosts: BlogPost[] = [
     "category": "Digital Marketing",
     "excerpt": "Google search algorithm is a complex system that allows Google to find, rank and return the most relevant pages for a certain search query. What is Google's la...",
     "content": "<p>\r\n\tGoogle search algorithm is a complex system that allows Google to find, rank and return the most relevant pages for a certain search query.<br />\r\n\t<br />\r\n\tWhat is Google's latest search algorithm called? Its RankBrain.RankBrain is a machine learning algorithm that filters search results to help give users a best answer to their query. Initially, RankBrain was used for about 15 percent of queries (mainly new queries Google had never seen before), but now it is involved in almost every query entered into Google.<br />\r\n\t<br />\r\n\tGoogle has updated its search algorithm many more times to serve even better.Few markable updates are as follows-</p>\r\n<p>\r\n\t&nbsp;</p>\r\n<ul>\r\n\t<li>\r\n\t\t<strong>Panda Update-</strong> It's basically a content quality filter that was targeted at poor quality and thin sites with little SEO power in order to prevent them from ranking well in Google's top search engine results pages (SERPs).</li>\r\n\t<li>\r\n\t\t<strong>Penguin Update-</strong>Google Penguin is a set of algorithm updates that puts more focus on incoming links.</li>\r\n\t<li>\r\n\t\t<strong>Hummingbird Update-</strong> this update is designed to improve its delivery of results for the specified keyword – and not just the exact keyword itself.</li>\r\n\t<li>\r\n\t\t<strong>Pigeon Update- </strong>Pigeon emphasized the experience of local searchers, which is crucial to meeting the needs of users looking for products and businesses on-the-go.</li>\r\n\t<li>\r\n\t\t<strong>Fred Update-</strong>The update is suspected of targeting sites emphasizing revenue over quality content.Schwartz surveyed over 100 different sites to determine the specifics of the Fred update. He noted that most of the sites impacted were sprinkled with affiliate links and provided little-to-no legitimate value with their content.</li>\r\n</ul>"
-  },
-  {
-    "id": 4,
-    "title": "Modern UI/UX Principles for High-Performance Web Applications",
-    "slug": "modern-ui-ux-principles-for-high-performance-web-applications",
-    "image": "https://tenacioushub.com/uploads/blog/th-dm.jpg",
-    "author": "anuradha",
-    "date": "Jan 2026",
-    "comments": "04 Comments",
-    "category": "Website Development",
-    "excerpt": "Explore the fundamental user experience paradigms and design systems that define modern, high-converting digital products.",
-    "content": "<p>Design in the modern digital era transcends pure visual aesthetics; it is an exact discipline blending human psychology, accessibility, and high-performance engineering. A well-crafted user experience directly drives customer satisfaction and commercial conversion.</p>\n<h3>1. Establishing a Cohesive Design System</h3>\n<p>Consistency across typography, color tokens, elevation layers, and interactive states fosters intuitive navigation. Design systems enable agile engineering teams to deploy feature updates rapidly without visual fragmentation.</p>\n<h3>2. Micro-Interactions and Perceived Performance</h3>\n<p>Subtle hover reactions, skeleton loaders, and tactile button animations provide instant user feedback. These micro-interactions make web applications feel responsive, polished, and delightful to navigate.</p>\n<h3>3. Universal Accessibility (WCAG Compliance)</h3>\n<p>Ensuring accessible contrast ratios, full keyboard navigability, and clear ARIA landmark tags guarantees that digital products remain welcoming and functional for every demographic.</p>"
-  },
-  {
-    "id": 3,
-    "title": "Mastering Core Web Vitals for Sustainable Organic Search Rankings",
-    "slug": "mastering-core-web-vitals-for-sustainable-organic-search-rankings",
-    "image": "https://tenacioushub.com/uploads/blog/th-dm.jpg",
-    "author": "anuradha",
-    "date": "Jan 2026",
-    "comments": "04 Comments",
-    "category": "Website Development",
-    "excerpt": "Understand Google's Core Web Vitals—LCP, INP, and CLS—and implement technical optimizations to protect your organic ranking momentum.",
-    "content": "<p>Google's search ranking algorithms place immense weight on actual page performance and real-user experience metrics. The Core Web Vitals framework offers concrete benchmarks to diagnose and elevate technical page health.</p>\n<h3>1. Largest Contentful Paint (LCP)</h3>\n<p>LCP measures perceived loading speed. Optimizing hero media assets, configuring modern WebP/AVIF formats, and establishing pre-connect headers ensure primary content renders within the optimal sub-2.5 second window.</p>\n<h3>2. Interaction to Next Paint (INP)</h3>\n<p>Replacing First Input Delay, INP tracks page responsiveness throughout the entire session lifecycle. Breaking up long JavaScript main-thread tasks ensures interactive components react instantly to touch and keyboard inputs.</p>\n<h3>3. Cumulative Layout Shift (CLS)</h3>\n<p>Visual stability prevents jarring jumps during page rendering. Explicitly declaring image dimensions and reserving container slots for dynamic content ensures a frictionless, reliable reading experience.</p>"
-  },
-  {
-    "id": 2,
-    "title": "Omnichannel Customer Support & BPO Excellence for Fast-Growing Brands",
-    "slug": "omnichannel-customer-support-bpo-excellence-for-fast-growing-brands",
-    "image": "https://tenacioushub.com/uploads/blog/th-dm.jpg",
-    "author": "anuradha",
-    "date": "Jan 2026",
-    "comments": "04 Comments",
-    "category": "Start up Advise",
-    "excerpt": "How modern outsourcing and 24/7 dedicated support teams empower burgeoning enterprises to scale customer delight without ballooning overhead.",
-    "content": "<p>For high-growth startups and established enterprises alike, delivering prompt, empathetic customer support across multiple touchpoints is essential for client retention and brand reputation.</p>\n<h3>1. Blending Automated Workflows with Human Empathy</h3>\n<p>AI-assisted triage and smart ticketing systems resolve repetitive inquiries instantly, allowing specialized human representatives to focus on complex, nuanced customer challenges that require genuine empathy.</p>\n<h3>2. 24/7 Global Coverage Across Channels</h3>\n<p>Customers expect immediate resolutions whether they reach out via live chat, email, phone, or social channels. Tenacious Hub provides dedicated, rigorously trained BPO teams that represent your brand with precision and care around the clock.</p>\n<h3>3. Continuous Quality Assurance & Feedback Loops</h3>\n<p>Systematic call auditing, CSAT/NPS tracking, and direct feedback loops with product and engineering teams transform support operations from a cost center into a strategic engine for continuous product improvement.</p>"
   },
   {
     "id": 1,
