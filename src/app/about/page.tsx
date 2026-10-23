@@ -173,6 +173,54 @@ export default function AboutPage() {
         </div>
       </SectionWrapper>
 
+      {/* Executive Leadership Spotlight */}
+      <SectionWrapper className="py-20 transition-colors">
+        <div className="container-custom">
+          <div className="glass-card p-8 md:p-12 rounded-3xl border border-[var(--border-main)] shadow-xl relative overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-4 flex justify-center">
+                <div className="relative group w-full max-w-xs aspect-square sm:aspect-[4/5] rounded-2xl overflow-hidden border border-[var(--glass-border)] shadow-2xl bg-gradient-to-br from-[var(--primary)]/10 to-[var(--accent)]/10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/team/vaibhav.jpg"
+                    alt="Vaibhav Sheel Pandey - Founder & Managing Director"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute bottom-3 left-3 right-3 px-3.5 py-2 rounded-xl bg-[var(--bg-card)]/90 backdrop-blur-md border border-[var(--border-main)] text-center shadow-lg">
+                    <p className="text-xs font-bold text-[var(--text-main)]">Vaibhav Sheel Pandey</p>
+                    <p className="text-[11px] font-semibold text-[var(--primary)]">Founder & Managing Director</p>
+                  </div>
+                </div>
+              </div>
+              <div className="lg:col-span-8 space-y-5">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary)] text-xs font-bold">
+                  <Award className="w-3.5 h-3.5" />
+                  Executive Leadership
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--text-main)] tracking-tight">
+                  Guided by Engineering Rigor & Strategic Vision
+                </h2>
+                <p className="text-[var(--text-muted)] text-base leading-relaxed">
+                  Founded and led by <strong>Vaibhav Sheel Pandey</strong>, Tenacious Hub merges computer science engineering fundamentals (B.Tech CSE, M.Tech IT) with over a decade of hands-on digital marketing architecture and enterprise consulting.
+                </p>
+                <blockquote className="p-4 bg-[var(--primary)]/5 border-l-4 border-[var(--primary)] rounded-r-xl text-sm italic text-[var(--text-main)] font-medium leading-relaxed">
+                  &ldquo;Our mission is to engineer predictable, high-ROI digital engines that stand the test of time — delivering measurable business revenue across every client engagement.&rdquo;
+                </blockquote>
+                <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <Link
+                    href="/team"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--primary)] text-white font-bold rounded-full text-xs shadow-lg shadow-[var(--primary)]/20 hover:bg-[var(--primary-light)] hover:scale-[1.02] transition-all"
+                  >
+                    View Full Executive Profile & Certifications
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
+
       {/* Values */}
       <SectionWrapper className="py-24 bg-slate-50 dark:bg-slate-950/40 border-y border-slate-200 dark:border-white/5 transition-colors">
         <div className="container-custom space-y-16">
