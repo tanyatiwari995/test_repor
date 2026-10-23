@@ -9,9 +9,11 @@ export interface TeamMember {
   photo?: string | null;
   responsibilities: string[];
   experience: string;
+  education: string[];
+  certifications: string[];
   specialties: string[];
-  department: "Leadership" | "Growth Marketing" | "Digital Engineering" | "Business Operations";
-  isFounder?: boolean;
+  department: "Executive Leadership";
+  isFounder: boolean;
 }
 
 export const founderMember: TeamMember = {
@@ -19,102 +21,45 @@ export const founderMember: TeamMember = {
   name: "Vaibhav Sheel Pandey",
   role: "Founder & Managing Director",
   title: "Founder & Managing Director",
-  office: "Noida (UP) & Rudrapur (Uttarakhand)",
+  office: "Noida (Delhi NCR) & Rudrapur (Uttarakhand)",
   photo: "/team/vaibhav.jpg",
-  bio: `Vaibhav Sheel Pandey founded Tenacious Hub with a vision to bring enterprise-grade digital capabilities to businesses of all sizes. With deep expertise spanning web engineering, performance marketing, and BPO operations, he has led the firm from a focused web design practice to a full-stack digital technology and management-consulting company serving clients across India and globally.
+  bio: `Vaibhav Sheel Pandey is the founder and Managing Director of Tenacious Hub Private Limited. Holding both a B.Tech in Computer Science & Technology and an M.Tech in Information Technology, he merges rigorous technical computer science fundamentals with high-growth digital marketing and strategic business consulting.
 
-A firm believer in outcome-over-output, Vaibhav personally oversees client strategy and ensures every engagement is grounded in measurable business impact.`,
-  quote: "Our mission is to bridge technical excellence and operational execution for businesses so they can scale with predictability and efficiency.",
+With over a decade of hands-on expertise in Google Analytics, Google Ads, and full-funnel digital architecture, Vaibhav has consulted for multinational corporations (MNCs), real estate developers, and fast-growing Indian enterprises. His operational philosophy centers on strategic management — maximizing output from minimal input to build sustainable, predictable revenue engines for local and global businesses.
+
+Under his leadership, Tenacious Hub has grown from a specialized web engineering shop into an integrated digital technology, GEO/AI search, and BPO management consulting firm serving clients across India, North America, and worldwide.`,
+  quote: "Our mission is to bridge technical excellence and operational execution for businesses so they can scale with predictability, transparency, and high ROI.",
   responsibilities: [
-    "Strategic roadmap and company growth direction",
-    "Key enterprise account strategy & leadership",
-    "Pillar innovation across Engineering, Growth, and BPO operations",
+    "Overall company vision, digital strategy, and enterprise roadmap",
+    "Digital marketing architecture & high-intent lead generation funnels",
+    "Strategic business management and client growth advisory",
+    "Technology governance across Digital Engineering and BPO operations",
   ],
-  experience: "10+ Years Industry Leadership",
+  experience: "10+ Years Industry Leadership & Consulting",
+  education: [
+    "B.Tech - Computer Science & Technology",
+    "M.Tech - Information Technology",
+  ],
+  certifications: [
+    "Google Analytics Certified",
+    "Google Ads Professional",
+    "Google Search Console & Webmaster Specialist",
+    "Google Digital Unlocked Certified",
+  ],
   specialties: [
-    "Digital Strategy & Architecture",
-    "Business Development & Partnerships",
-    "BPO Operations Management",
-    "Growth Marketing Oversight",
+    "Digital Strategy & IT Architecture",
+    "Google Analytics & Conversion Tracking",
+    "AI SEO & Generative Engine Optimization (GEO)",
+    "High-Intent Lead Generation (Real Estate & B2B)",
+    "Strategic Management & MNC Consulting",
+    "BPO Operations & Delivery Governance",
   ],
-  department: "Leadership",
+  department: "Executive Leadership",
   isFounder: true,
 };
 
-export const leadershipTeam: TeamMember[] = [
-  {
-    slug: "ananya-sharma",
-    name: "Ananya Sharma",
-    role: "Head of Growth Marketing",
-    title: "Head of Growth Marketing",
-    office: "Noida Office",
-    photo: null,
-    bio: "Ananya Sharma leads the Growth Marketing division at Tenacious Hub, overseeing search engine optimization, paid media campaigns, and Generative Engine Optimization (GEO).",
-    quote: "Marketing in 2026 demands AI search visibility, high-intent targeting, and ruthless focus on conversion tracking.",
-    responsibilities: [
-      "Client SEO & GEO organic search campaigns",
-      "PPC media budgets and ROAS optimization",
-      "Performance content writing team guidance",
-    ],
-    experience: "8+ Years Growth Marketing",
-    specialties: [
-      "SEO & GEO Engine Optimization",
-      "Paid Performance Ad Campaigns",
-      "Conversion Rate Optimization (CRO)",
-      "High-Intent Lead Funnels",
-    ],
-    department: "Growth Marketing",
-  },
-  {
-    slug: "rohit-verma",
-    name: "Rohit Verma",
-    role: "VP of Software Engineering",
-    title: "VP of Software Engineering",
-    office: "Noida (Corporate) Office",
-    photo: null,
-    bio: "Rohit Verma directs technical software engineering, website architecture, mobile apps, and attendance management software development.",
-    quote: "Clean, modular code and sub-second page performance are non-negotiable standards for modern web applications.",
-    responsibilities: [
-      "Next.js, React & Node.js application architecture",
-      "Android mobile app development & API design",
-      "Cybersecurity and code quality standards",
-    ],
-    experience: "9+ Years Technical Architecture",
-    specialties: [
-      "Next.js App Router Architecture",
-      "REST & GraphQL Microservices",
-      "Android Native & Hybrid Development",
-      "Cloud Infrastructure & Security",
-    ],
-    department: "Digital Engineering",
-  },
-  {
-    slug: "megha-gupta",
-    name: "Megha Gupta",
-    role: "Director of Business Operations & BPO",
-    title: "Director of Business Operations & BPO",
-    office: "Rudrapur HQ",
-    photo: null,
-    bio: "Megha Gupta manages back-office operations, virtual assistant desk teams, data entry accuracy standards, and financial accounting support.",
-    quote: "Precision and SLA compliance are the cornerstones of successful back-office outsourcing.",
-    responsibilities: [
-      "BPO team management and QA audits",
-      "Virtual Assistant deployment workflows",
-      "Financial advisory and bookkeeping oversight",
-    ],
-    experience: "7+ Years Operations Management",
-    specialties: [
-      "Enterprise BPO Workflow Automation",
-      "Virtual Assistant Desk Leadership",
-      "Financial Reporting & Compliance",
-      "SLA & Quality Assurance",
-    ],
-    department: "Business Operations",
-  },
-];
+export const allTeamMembers: TeamMember[] = [founderMember];
 
-export const allTeamMembers: TeamMember[] = [founderMember, ...leadershipTeam];
-
-export const teamDataMap: Record<string, TeamMember> = Object.fromEntries(
-  allTeamMembers.map((member) => [member.slug, member])
-);
+export const teamDataMap: Record<string, TeamMember> = {
+  [founderMember.slug]: founderMember,
+};

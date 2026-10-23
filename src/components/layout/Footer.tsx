@@ -72,7 +72,7 @@ const pillars = [
 
 const company = [
   { name: "About Us", href: "/about" },
-  { name: "Our Team", href: "/team" },
+  { name: "Founder", href: "/team" },
   { name: "Careers", href: "/careers" },
   { name: "Case Studies", href: "/work" },
   { name: "Blog", href: "/blog" },
